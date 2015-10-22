@@ -68,11 +68,13 @@
 
         $form['submit'] = array(
             '#type' => 'submit',
+            // '#form_validate' => array('triangle_tracker_form_validate'),
             '#value' => 'ATTACK',
         );
 
         return $form;
     }
+
 
     function queen_attack_form_submit($form, &$form_state)
     {
@@ -107,6 +109,15 @@
         // }
 
     }
+
+    function queen_attack_form_validate($form, &$form_state) {
+
+      // var_dump($form_state['values']['queenX_location']);
+  if (($form_state['values']['queenX_location'] == $form_state['values']['userX_location']) && ($form_state['values']['queenY_location'] == $form_state['values']['userY_location'])) 
+  {
+      form_set_error('queenX_location', 'Haha, you cannot put two pieces on the same spot!');
+  }
+}
 
     function queen_attack_results()
     {
